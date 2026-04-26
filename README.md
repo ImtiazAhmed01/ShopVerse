@@ -1,4 +1,4 @@
-# Odyssey E-Commerce Assessment
+# E-Commerce platform
 
 A high-performance, modern e-commerce web application prototype built using Next.js (App Router). This assessment task demonstrates best practices in layout design, state management, complex API integration, and mock Firebase authentication.
 
