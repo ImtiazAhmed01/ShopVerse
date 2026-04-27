@@ -1,22 +1,50 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import { useProducts } from "@/context/ProductContext";
 import { Trash2, ArrowUpRight, Package, Plus } from "lucide-react";
+import type { Product } from "@/context/ProductContext";
 
 export default function ManageProductsPage() {
   const { user, loading } = useAuth();
   const router = useRouter();
-  const { managedProducts, removeProduct } = useProducts();
+  const [managedProducts, setManagedProducts] = useState<Product[]>([]);
+  const [isLoadingProducts, setIsLoadingProducts] = useState(true);
+
+  const fetchProducts = async () => {
+    setIsLoadingProducts(true);
+    try {
+      const { getProductsFromDb } = await import("@/app/actions");
+      const data = await getProductsFromDb();
+      setManagedProducts(data);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setIsLoadingProducts(false);
+    }
+  };
 
   useEffect(() => {
     if (!loading && !user) {
       router.push("/login");
+    } else if (user) {
+      fetchProducts();
     }
   }, [user, loading, router]);
+
+  const handleRemove = async (id: string | number) => {
+    if (confirm("Are you sure you want to delete this product?")) {
+      try {
+        const { removeProductFromDb } = await import("@/app/actions");
+        await removeProductFromDb(id);
+        await fetchProducts(); // Refresh the list
+      } catch (e) {
+        console.error("Failed to delete", e);
+      }
+    }
+  };
 
   if (loading || !user) {
     return <div className="min-h-[50vh] flex items-center justify-center">Loading...</div>;
@@ -28,7 +56,7 @@ export default function ManageProductsPage() {
         <div>
           <h1 className="text-3xl font-extrabold tracking-tight">Manage Products</h1>
           <p className="mt-2 text-muted-foreground">
-            View and manage custom products you have added to the platform.
+            View and manage products in the MongoDB database.
           </p>
         </div>
         <Link
@@ -40,14 +68,16 @@ export default function ManageProductsPage() {
       </div>
 
       <div className="rounded-3xl border border-border bg-card shadow-sm overflow-hidden text-sm">
-        {managedProducts.length === 0 ? (
+        {isLoadingProducts ? (
+          <div className="p-16 text-center text-muted-foreground">Loading products from database...</div>
+        ) : managedProducts.length === 0 ? (
           <div className="flex flex-col items-center justify-center p-16 text-center">
             <div className="h-16 w-16 bg-primary/10 text-primary rounded-full flex items-center justify-center mb-4">
               <Package size={32} />
             </div>
-            <h3 className="text-xl font-bold mb-2">No custom products found</h3>
+            <h3 className="text-xl font-bold mb-2">No products found</h3>
             <p className="text-muted-foreground max-w-md">
-              You haven&apos;t added any products yet. They will appear here once you create them.
+              There are no products in the database. Add some!
             </p>
           </div>
         ) : (
@@ -91,11 +121,7 @@ export default function ManageProductsPage() {
                           <ArrowUpRight size={18} />
                         </Link>
                         <button
-                          onClick={() => {
-                            if (confirm("Are you sure you want to delete this product?")) {
-                              removeProduct(product.id);
-                            }
-                          }}
+                          onClick={() => handleRemove(product.id)}
                           className="flex h-9 w-9 items-center justify-center rounded-lg text-red-500 hover:bg-red-50 dark:hover:bg-red-950 transition-all font-medium"
                           title="Delete"
                         >

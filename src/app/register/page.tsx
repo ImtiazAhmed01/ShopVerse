@@ -20,11 +20,11 @@ export default function RegisterPage() {
       setError("Please fill in all fields.");
       return;
     }
-    
+
     try {
       setError("");
       setIsSubmitting(true);
-      await register(email, name);
+      await register(email, name, password);
       router.push("/");
     } catch (err) {
       setError("Failed to create account");
@@ -35,11 +35,16 @@ export default function RegisterPage() {
 
   const handleGoogleLogin = async () => {
     try {
-      setIsSubmitting(true);
+      // Do not set states before Firebase popup to avoid browser popup blockers.
       await loginWithGoogle();
+      setIsSubmitting(true);
       router.push("/");
-    } catch (err) {
-      setError("Failed to sign up with Google");
+    } catch (err: any) {
+      if (err.code === "auth/popup-closed-by-user") {
+        setError("Sign up was cancelled.");
+      } else {
+        setError(err.message || "Failed to sign up with Google");
+      }
       setIsSubmitting(false);
     }
   };
@@ -50,7 +55,7 @@ export default function RegisterPage() {
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-extrabold tracking-tight">Create an account</h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Join Odyssey today
+            Join ShopVerse today
           </p>
         </div>
 
@@ -111,6 +116,7 @@ export default function RegisterPage() {
         </div>
 
         <button
+          type="button"
           onClick={handleGoogleLogin}
           disabled={isSubmitting}
           className="flex w-full items-center justify-center gap-2 rounded-full border border-border bg-background py-3 font-medium transition-colors hover:bg-muted disabled:opacity-50"

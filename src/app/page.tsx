@@ -28,7 +28,7 @@ export default async function Home() {
         <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-3xl">
             <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1]">
-              Shop the <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-violet-500">Latest Products</span> with Odyssey
+              Shop the <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-violet-500">Latest Products</span> with ShopVerse
             </h1>
             <p className="text-xl text-muted-foreground mb-10 max-w-2xl leading-relaxed">
               Experience the pinnacle of online shopping. Premium quality, expertly curated catalog, and seamless delivery directly to you.
@@ -146,7 +146,7 @@ export default async function Home() {
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { name: "Sarah J.", role: "Verified Buyer", text: "Odyssey has completely transformed how I shop online. The quality is unmatched and delivery is rapid!" },
+              { name: "Sarah J.", role: "Verified Buyer", text: "ShopVerse has completely transformed how I shop online. The quality is unmatched and delivery is rapid!" },
               { name: "Michael T.", role: "Premium Member", text: "I bought a jacket and some electronics. Both arrived in perfect condition and exceeded my expectations." },
               { name: "Emily R.", role: "Fashion Blogger", text: "The UI design is gorgeous and finding what I need takes seconds. Highly recommended store." }
             ].map((testimonial) => (

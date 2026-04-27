@@ -34,7 +34,7 @@ export default function Navbar() {
       <Link href="/about" className="text-sm font-medium transition-colors hover:text-primary">
         About
       </Link>
-      <Link href="/products" className="text-sm font-medium transition-colors hover:text-primary">
+      <Link href="/contact" className="text-sm font-medium transition-colors hover:text-primary">
         Contact
       </Link>
     </>
@@ -48,7 +48,7 @@ export default function Navbar() {
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
               <ShoppingBag size={18} strokeWidth={2.5} />
             </div>
-            <span className="text-xl font-bold tracking-tight">Odyssey<span className="text-primary">.</span></span>
+            <span className="text-xl font-bold tracking-tight">ShopVerse<span className="text-primary">.</span></span>
           </Link>
         </div>
 

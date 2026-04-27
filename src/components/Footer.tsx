@@ -11,7 +11,7 @@ export default function Footer() {
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                 <ShoppingBag size={18} strokeWidth={2.5} />
               </div>
-              <span className="text-xl font-bold tracking-tight">Odyssey<span className="text-primary">.</span></span>
+              <span className="text-xl font-bold tracking-tight">ShopVerse<span className="text-primary">.</span></span>
             </Link>
             <p className="text-sm text-muted-foreground">
               Discover a universe of premium products curated just for you. Seamless shopping, unmatched quality.
@@ -62,7 +62,7 @@ export default function Footer() {
         </div>
         
         <div className="mt-12 border-t border-border pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Odyssey Fake Commerce. Built for assessment.</p>
+          <p>&copy; {new Date().getFullYear()} ShopVerse Fake Commerce. Built for assessment.</p>
         </div>
       </div>
     </footer>

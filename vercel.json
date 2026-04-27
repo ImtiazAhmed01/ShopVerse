@@ -1,0 +1,13 @@
+{
+    "name": "shopverse",
+    "env": {
+        "DB_user": "shopverse",
+        "DB_pass": "6f6v2QxM8o82bTCl"
+    },
+    "build": {
+        "env": {
+            "DB_user": "shopverse",
+            "DB_pass": "6f6v2QxM8o82bTCl"
+        }
+    }
+}

@@ -6,8 +6,8 @@ import { AuthProvider } from "@/context/AuthContext";
 import { ProductProvider } from "@/context/ProductContext";
 
 export const metadata: Metadata = {
-  title: "Odyssey | Premium E-Commerce",
-  description: "Shop the latest and greatest products at Odyssey.",
+  title: "ShopVerse | Premium E-Commerce",
+  description: "Shop the latest and greatest products at ShopVerse.",
 };
 
 export default function RootLayout({

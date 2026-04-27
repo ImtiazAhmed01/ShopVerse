@@ -2,9 +2,9 @@ export default function AboutPage() {
   return (
     <div className="container mx-auto px-4 py-16 sm:px-6 lg:py-24 max-w-4xl">
       <div className="text-center mb-16">
-        <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl mb-6">About Odyssey</h1>
+        <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl mb-6">About ShopVerse</h1>
         <p className="text-xl text-muted-foreground leading-relaxed">
-          Odyssey is a modern Next.js E-Commerce prototype built to demonstrate 
+          ShopVerse is a modern Next.js E-Commerce prototype built to demonstrate 
           high-quality frontend architecture, premium design aesthetics, and robust React state management.
         </p>
       </div>

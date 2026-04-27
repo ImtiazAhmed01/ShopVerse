@@ -29,10 +29,10 @@ export default function AddProductPage() {
     return <div className="min-h-[50vh] flex items-center justify-center">Loading...</div>;
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Validate
     if (!title || !description || !price || isNaN(Number(price))) {
       setIsSubmitting(false);
@@ -40,12 +40,13 @@ export default function AddProductPage() {
     }
 
     try {
-      addProduct({
+      const { addProductToDb } = await import("@/app/actions");
+      await addProductToDb({
         title,
         description,
         price: Number(price),
         category: category.toLowerCase(),
-        image: image || "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=600&auto=format&fit=crop", 
+        image: image || "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=600&auto=format&fit=crop",
       });
       setSuccess(true);
       // Reset form
